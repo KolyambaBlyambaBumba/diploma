@@ -1,3 +1,6 @@
+using Diploma;
+using Diploma.Extensions;
+
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
 	Args = args,
@@ -7,6 +10,13 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSqlite<CatalogContext>(builder.Configuration["connectionString"]);
+
+builder.Services.AddAsyncInitializer(async sp =>
+{
+	var dbContext = sp.GetRequiredService<CatalogContext>();
+	await dbContext.Database.EnsureCreatedAsync();
+});
 
 var app = builder.Build();
 
@@ -26,4 +36,5 @@ app.MapControllers();
 
 app.MapFallbackToFile("index.html");
 
-app.Run();
+await app.InitAsync();
+await app.RunAsync();
