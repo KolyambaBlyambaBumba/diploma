@@ -11,7 +11,7 @@ const products = [
     description: "Описание 2"
   },
 ];
-
+//pedik
 function App() {
   const clickHandler = (name) => console.log(`click ${name}`);
 
