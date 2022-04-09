@@ -13,10 +13,18 @@ const products = [
 ];
 
 function App() {
+  const clickHandler = (name) => console.log(`click ${name}`);
+
   return (
     <div className="App">
       <header className="App-header">
-        { products.map(x => (<Product product={x}/>)) }
+        {
+          products.map((x, i) => (
+            <div key={i} onClick={() => clickHandler(x.name)}>
+              <div>Имя: {x.name}</div>
+              <div>Описание: {x.description}</div>
+            </div>))
+        }
       </header>
     </div>
   );
