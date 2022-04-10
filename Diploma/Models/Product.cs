@@ -8,9 +8,7 @@ public class Product
 
 	public string? Description { get; init; }
 
-#pragma warning disable CA1819
-	public byte[]? Image { get; init; }
-#pragma warning restore CA1819
-
-	public string? ImageMimeType { get; init; }
+#pragma warning disable CA1002
+	public ICollection<ProductImage> Images { get; init; } = new List<ProductImage>();
+#pragma warning restore CA1002
 }

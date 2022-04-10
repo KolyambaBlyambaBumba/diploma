@@ -18,8 +18,16 @@ public class CatalogContext : DbContext
 
 			e.Property(x => x.Name);
 			e.Property(x => x.Description);
-			e.Property(x => x.Image);
+
+			e.HasMany(x => x.Images).WithOne().HasForeignKey(x => x.ProductId);
+		});
+
+		modelBuilder.Entity<ProductImage>(e =>
+		{
+			e.HasKey(x => x.Id);
+
 			e.Property(x => x.ImageMimeType);
+			e.Property(x => x.ImageData);
 		});
 	}
 }
