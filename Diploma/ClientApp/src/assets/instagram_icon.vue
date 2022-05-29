@@ -65,3 +65,9 @@
 </g>
 </svg>
 </template>
+
+<script>
+  export default {
+    name: 'insta'
+  }
+</script>

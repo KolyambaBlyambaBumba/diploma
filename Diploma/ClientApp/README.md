@@ -1,4 +1,4 @@
-# diploma
+# diplom
 
 ## Project setup
 ```
