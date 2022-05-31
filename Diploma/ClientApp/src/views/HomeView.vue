@@ -7,8 +7,6 @@
   </div>
 </template>"
 <script>
-// @ is an alias to /src
-
 export default {
   name: 'HomeView',
   components: {
@@ -24,8 +22,7 @@ export default {
     max-width: 1200px;
     width: 100%;
     flex-direction: column;
-    margin-top: 165px;
-    height: 700px;
+    height: 600px;
 
     img {
       width: 100px;

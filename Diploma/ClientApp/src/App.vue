@@ -1,7 +1,6 @@
 <template>
-
+  <div class="header_wrapper"></div>
   <div class="header">
-    <div class="hh"></div>
     <div class="header_top">
       <div class="header_top_text"><strong>Сувенирное мыло ручной работы <br>в Витебске</strong></div>
       <div class="logo">
@@ -15,9 +14,9 @@
         <router-link to="/" class="nav_rl">Главная</router-link>
         <router-link to="/catalog" class="nav_rl">Каталог</router-link>
         <router-link to="/delivery" class="nav_rl">Оплата и доставка</router-link>
-        <router-link to="/contact" class="nav_rl">Контакты</router-link>
+        <router-link to="/contacts" class="nav_rl">Контакты</router-link>
       </nav>
-      <div class="cart"><a href="">Корзина</a></div>
+      <router-link to="/cart" class="nav_cart">Корзина</router-link>
     </div>
   </div>
 
@@ -44,6 +43,17 @@
   font-size: 14pt;
   font-family: Roboto, sans-serif;
   font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.header_wrapper {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  height: 165px;
+  top: 0;
+  // ????
 }
 
 .header {
@@ -53,7 +63,6 @@
   max-width: 1200px;
   width: 100%;
   flex-direction: column;
-  margin-bottom: 10px;
   position: fixed;
   top: 0;
   z-index: 999;
@@ -117,7 +126,7 @@
   }
 }
 
-.cart {
+.nav_cart {
   padding-right: 50px;
 }
 
@@ -132,6 +141,8 @@
   background-color: #333;
   color: #fff;
   margin-top: 10px;
+  // position: fixed;
+  // bottom: 0; ?????
 }
 
 </style>
