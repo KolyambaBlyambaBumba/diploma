@@ -1,17 +1,21 @@
 <template>
     <div class="product_card">
-        <img src="@/assets/s123.png" alt="">
-        <div class="product_name"><h3>букет</h3></div>
-        <div class="product_description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quo autem ut.</div>
-        <div class="product_cost">25 руб.</div>
-        <input type="button" value="в корзину">
+        <img :src="image" alt="">
+        <div class="product_name"><h3>{{ name }}</h3></div>
+        <div class="product_description">{{ description }}</div>
+        <div class="product_cost">{{ cost }} руб.</div>
+        <input type="button" value="В корзину">
     </div>
 </template>
 
 <script>
 export default {
   name: 'ProductCard',
-  components: {
+  props: {
+    image: String,
+    name: String,
+    description: String,
+    cost: Number
   }
 }
 </script>
