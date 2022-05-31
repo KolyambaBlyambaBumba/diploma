@@ -22,7 +22,7 @@ export default {
     max-width: 1200px;
     width: 100%;
     flex-direction: column;
-    height: 600px;
+    height: 100px;
 
     img {
       width: 100px;
