@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    jompa
     <div class="home_content">
       <img src="@/assets/s123.png" alt="">
     </div>
   </div>
-</template>"
+</template>
+
 <script>
 export default {
   name: 'HomeView',
@@ -22,17 +22,10 @@ export default {
     max-width: 1200px;
     width: 100%;
     flex-direction: column;
-    height: 100px;
 
     img {
-      width: 100px;
+      width: 220px;
 
     }
   }
-
-  .home_content {
-    background-color: indianred;
-    height: 200px;
-  }
-
 </style>

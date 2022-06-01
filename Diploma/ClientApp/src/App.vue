@@ -24,8 +24,8 @@
   <div class="footer">
     <div class="footer_info">text</div>
     <div class="links">
-      <a href="https://vk.com/alwa_soap">1</a>
-      <a href="https://vk.com/away.php?to=https%3A%2F%2Finstagram.com%2Falwa_soap%3Figshid%3DYmMyMTA2M2Y%3D&cc_key=">2</a>
+      <a href="https://vk.com/alwa_soap"><img src="@/assets/vk_link.svg" alt="" id="vk_img"></a>
+      <a href="https://instagram.com/alwa_soap?igshid=YmMyMTA2M2Y="><img src="@/assets/instagram_link.svg" alt="" id="insta_img"></a>
     </div>
   </div>
 </template>
@@ -37,6 +37,11 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+}
+
 #app {
   display: flex;
   justify-content: center;
@@ -45,8 +50,6 @@ export default {
   font-size: 14pt;
   font-family: Roboto, sans-serif;
   font-weight: normal;
-  margin: 0;
-  padding: 0;
 }
 
 .header_wrapper {
@@ -54,8 +57,7 @@ export default {
   max-width: 1200px;
   width: 100%;
   height: 165px;
-  top: 0;
-  // ????
+  margin-bottom: 10px;
 }
 
 .header {
@@ -134,7 +136,7 @@ export default {
 
 .footer {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   max-width: 1200px;
   width: 100%;
@@ -143,8 +145,32 @@ export default {
   background-color: #333;
   color: #fff;
   margin-top: 10px;
-  // position: fixed;
-  // bottom: 0; ?????
+  position: fixed;
+  bottom: 0;
 }
 
+.links {
+  display: flex;
+  align-items: center;
+
+  a {
+    height: 25px;
+  }
+}
+
+#vk_img {
+  width: 25px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+#insta_img {
+  width: 20px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
 </style>
