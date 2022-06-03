@@ -4,9 +4,12 @@
     <div class="header_top">
       <div class="header_top_text"><strong>Сувенирное мыло ручной работы <br>в Витебске</strong></div>
       <div class="logo">
-        <img src="@/assets/logo.png" alt="">
+        <a href="/"><img src="@/assets/logo.png" alt=""></a>
       </div>
-      <div class="tel">+375 29 818 59 51 МТС<br>+375 44 571 27 53 А1</div>
+      <div class="tel">
+        <a href="tel:+375298185951">+375 29 818 59 51 МТС</a><br>
+        <a href="tel:+375445712753">+375 44 571 27 53 А1</a>
+      </div>
     </div>
 
     <div class="header_bottom">
@@ -14,7 +17,7 @@
         <router-link to="/" class="nav_rl">Главная</router-link>
         <router-link to="/catalog" class="nav_rl">Каталог</router-link>
         <router-link to="/delivery" class="nav_rl">Оплата и доставка</router-link>
-        <router-link to="/contacts" class="nav_rl">Контакты</router-link>
+        <router-link to="/contacts" class="nav_rl active_link">Контакты</router-link>
       </nav>
       <router-link to="/cart" class="nav_cart">Корзина</router-link>
     </div>
@@ -93,10 +96,12 @@ export default {
   }
 }
 
-.tel {
+.tel a{
   max-width: 20%;
   font-size: 0.65em;
   margin-right: 20px;
+  text-decoration: none;
+  color: inherit;
 }
 
 .logo img {
@@ -120,18 +125,34 @@ export default {
 
   .nav_rl {
     text-decoration: none;
-    padding-right: 50px;
+    margin-right: 50px;
     //color: #754847;
     color: #fff;
+    position: relative;
   }
 
-  .nav_rl:hover {
+  .nav_rl::before {
+    content: '';
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transform: scaleX(0);
+    transition: 0.1s;
+  }
+
+  .nav_rl:hover::before {
     text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+    transform: scaleX(1);
   }
 }
 
 .nav_cart {
-  padding-right: 50px;
+  margin-right: 50px;
 }
 
 .footer {
