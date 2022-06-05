@@ -1,6 +1,5 @@
 class CartService {
   add (productId, count) {
-    debugger
     const cart = JSON.parse(localStorage.getItem('cart') || '[]')
     const product = cart.filter((item) => item.productId === productId)[0]
 

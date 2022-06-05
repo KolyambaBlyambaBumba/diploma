@@ -21,7 +21,6 @@ export default {
 
   async created () {
     this.products = await productService.getProducts()
-    debugger
   }
 }
 </script>
