@@ -4,18 +4,26 @@
         <div class="product_name"><h3>{{ name }}</h3></div>
         <div class="product_description">{{ description }}</div>
         <div class="product_cost">{{ cost }} руб.</div>
-        <input type="button" value="В корзину">
+        <input type="button" value="В корзину" @click="addToCart">
     </div>
 </template>
 
 <script>
+import cartService from '@/services/CartService'
+
 export default {
   name: 'ProductCard',
   props: {
     image: String,
     name: String,
     description: String,
-    cost: Number
+    cost: Number,
+    id: String
+  },
+  methods: {
+    addToCart () {
+      cartService.add(this.id, 1)
+    }
   }
 }
 </script>
@@ -27,8 +35,7 @@ export default {
     flex-direction: column;
     align-items: center;
     font-size: 10pt;
-    margin: 0 10px;
-    margin-bottom: 25px;
+    margin: 0 10px 25px;
 
     img {
       max-width: 300px;

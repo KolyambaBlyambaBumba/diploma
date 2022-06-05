@@ -1,12 +1,12 @@
 <template>
   <div class="catalog">
-    <ProductCard v-for="product in products" :key="product.name" v-bind="product"></ProductCard>
+    <ProductCard v-for="product in products" :key="product.id" v-bind="product"></ProductCard>
   </div>
 </template>
 
 <script>
 import ProductCard from '@/components/ProductCard.vue'
-import s123 from '@/assets/s123.png'
+import productService from '@/services/ProductService'
 
 export default {
   name: 'CatalogView',
@@ -15,31 +15,23 @@ export default {
   },
   data () {
     return {
-      products: [
-        {
-          image: s123,
-          name: 'Букет',
-          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quo autem ut.',
-          cost: 25
-        },
-        {
-          image: s123,
-          name: 'Букет 2',
-          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quo autem ut.',
-          cost: 30
-        }
-      ]
+      products: []
     }
+  },
+
+  async created () {
+    this.products = await productService.getProducts()
+    debugger
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .catalog {
-    max-width: 1200px;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
+.catalog {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 </style>
