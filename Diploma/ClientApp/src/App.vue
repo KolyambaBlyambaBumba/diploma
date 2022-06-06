@@ -17,7 +17,7 @@
         <router-link to="/" class="nav_rl">Главная</router-link>
         <router-link to="/catalog" class="nav_rl">Каталог</router-link>
         <router-link to="/delivery" class="nav_rl">Оплата и доставка</router-link>
-        <router-link to="/contacts" class="nav_rl active_link">Контакты</router-link>
+        <router-link to="/contacts" class="nav_rl">Контакты</router-link>
       </nav>
       <router-link to="/cart" class="nav_cart">Корзина</router-link>
     </div>
@@ -153,7 +153,34 @@ export default {
 
 .nav_cart {
   margin-right: 50px;
+  text-decoration: none;
+  color: #fff;
+  position: relative;
 }
+
+.nav_cart::before {
+    content: '';
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transform: scaleX(0);
+    transition: 0.1s;
+  }
+
+  .nav_cart:hover::before {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+    transform: scaleX(1);
+  }
+
+  .nav_cart:hover::after {
+    content: '!';
+    color: red;
+  }
 
 .footer {
   display: flex;
@@ -161,7 +188,7 @@ export default {
   align-items: center;
   max-width: 1200px;
   width: 100%;
-  height: 50px;
+  height: 60px;
   align-items: center;
   background-color: #333;
   color: #fff;

@@ -1,15 +1,13 @@
 <template>
   <div class="home">
-    <div class="home_content">
-      <img src="@/assets/s123.png" alt="">
-    </div>
+    <vue-carousel :data="data" :controls="false" indicator-type="disc" :interval="3000" class="carousel_div"></vue-carousel>
   </div>
-  <vue-carousel :data="data" :controls="false"></vue-carousel>
 </template>
 
 <script>
 import VueCarousel from '@chenfengyuan/vue-carousel'
 import s123 from '@/assets/s123.png'
+
 export default {
   name: 'HomeView',
   components: {
@@ -18,9 +16,11 @@ export default {
   data () {
     return {
       data: [
-        `<div class="example-slide"><img src="${s123}" alt=""></div>`,
-        `<div class="example-slide"><img src="${s123}" alt=""></div>`,
-        `<div class="example-slide"><img src="${s123}" alt=""></div>`
+        `<div><img src="${s123}" alt="" class="carousel_img"></div>`,
+        `<div><img src="${s123}" alt="" class="carousel_img"></div>`,
+        `<div><img src="${s123}" alt="" class="carousel_img"></div>`,
+        `<div><img src="${s123}" alt="" class="carousel_img"></div>`,
+        `<div><img src="${s123}" alt="" class="carousel_img"></div>`
       ]
     }
   }
@@ -29,15 +29,23 @@ export default {
 
 <style lang="scss" scoped>
   .home {
-    background-color: lightblue;
     display: flex;
     align-items: center;
     max-width: 1200px;
     width: 100%;
+    height: 100%;
     flex-direction: column;
+  }
 
-    img {
-      width: 220px;
-    }
+  
+</style>
+
+<style>
+.carousel_div {
+  margin: 60px 0;
+}
+
+.carousel_img {
+    max-width: 1000px;
   }
 </style>
