@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <vue-carousel :data="data" :controls="false" indicator-type="disc" :interval="3000" class="carousel_div"></vue-carousel>
+    <vue-carousel :data="data" :controls="false" indicator-type="disc" :interval="1000" class="carousel_div"></vue-carousel>
   </div>
 </template>
 
@@ -36,16 +36,15 @@ export default {
     height: 100%;
     flex-direction: column;
   }
-
-  
 </style>
 
 <style>
 .carousel_div {
-  margin: 60px 0;
+
 }
 
 .carousel_img {
-    max-width: 1000px;
+  max-width: 1180px;
+  max-height: 580px;
   }
 </style>

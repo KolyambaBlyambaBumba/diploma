@@ -19,7 +19,7 @@
         <router-link to="/delivery" class="nav_rl">Оплата и доставка</router-link>
         <router-link to="/contacts" class="nav_rl">Контакты</router-link>
       </nav>
-      <router-link to="/cart" class="nav_cart">Корзина</router-link>
+      <router-link to="/cart" class="nav_cart">Корзина<span class="nav_cart_count">1</span></router-link>
     </div>
   </div>
 
@@ -37,7 +37,7 @@
 export default {
   components: {},
   methods: {
-    
+
   }
 }
 </script>
@@ -75,7 +75,7 @@ export default {
   flex-direction: column;
   position: fixed;
   top: 0;
-  z-index: 999;
+  z-index: 99;
   background-color: #fff;
 }
 
@@ -118,6 +118,7 @@ export default {
   background-color: #333;
   justify-content: space-between;
   align-items: center;
+  border-radius: 3px;
 }
 
 .nav {
@@ -180,9 +181,20 @@ export default {
     transform: scaleX(1);
   }
 
-  .nav_cart:hover::after {
-    content: '!';
-    color: red;
+  .nav_cart_count {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border: 3px solid #ff3205;
+    border-radius: 50%;
+    background-color: #ff3205;
+    text-align: center;
+    right: -30px;
+    bottom: 0;
+    box-sizing: border-box;
+    font-size: 12pt;
+    font-weight: 600;
+    padding-right: 1px;
   }
 
 .footer {
@@ -192,12 +204,12 @@ export default {
   max-width: 1200px;
   width: 100%;
   height: 60px;
-  align-items: center;
   background-color: #333;
+  border-radius: 3px;
   color: #fff;
   margin-top: 10px;
-  position: fixed;
-  bottom: 0;
+  //position: fixed;
+  //bottom: 0;
 }
 
 .links {

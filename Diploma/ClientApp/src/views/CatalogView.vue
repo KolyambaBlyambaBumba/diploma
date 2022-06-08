@@ -26,11 +26,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.catalog {
-  max-width: 1200px;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
+  .catalog {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 </style>
