@@ -14,7 +14,14 @@ const products = [
     name: 'Букет 2',
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quo autem ut.',
     cost: 3
-  }
+  },
+  {
+    id: '3',
+    image: s123,
+    name: 'Букет 3',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quo autem ut.',
+    cost: 76
+  },
 ]
 
 class ProductService {

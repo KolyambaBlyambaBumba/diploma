@@ -1,7 +1,9 @@
 <template>
   <div class="cart">
     <cart-product-card v-for="product in products" :key="product.id" v-bind="product"></cart-product-card>
-    <div class="total_sum">Итого: 123,00 руб.</div>
+    <div class="total_sum_container">
+      <div class="total_sum">Итого: 123,00 руб.</div>
+    </div>
   </div>
   <input class="cart_form_btn" type="button" value="Заказать">
 </template>
@@ -57,10 +59,16 @@ export default {
   background-color: #ff3205;
 }
 
+.total_sum_container {
+  position: absolute;
+  right: 10px;
+  margin-top: 30px;
+}
+
 .total_sum {
   position: fixed;
-  right: 70px;
-  margin-top: 10px;
+  transform: translateX(-100%);
+  min-width: 160px;
   font-weight: 600;
   font-size: 13pt;
   text-decoration: underline;
