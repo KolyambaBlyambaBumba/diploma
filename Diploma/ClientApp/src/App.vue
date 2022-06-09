@@ -19,11 +19,11 @@
         <router-link to="/delivery" class="nav_rl">Оплата и доставка</router-link>
         <router-link to="/contacts" class="nav_rl">Контакты</router-link>
       </nav>
-      <router-link to="/cart" class="nav_cart">Корзина<span class="nav_cart_count">1</span></router-link>
+      <router-link to="/cart" class="nav_cart">Корзина<span class="nav_cart_count">{{ productsInCart }}</span></router-link>
     </div>
   </div>
 
-  <router-view/>
+  <router-view />
   <div class="footer">
     <div class="footer_info">text</div>
     <div class="links">
@@ -34,10 +34,18 @@
 </template>
 
 <script>
+import cartService from "@/services/CartService";
+
 export default {
   components: {},
-  methods: {
+  data() {
+    return {
+      productsInCart: 0
+    };
+  },
 
+  created() {
+    this.productsInCart = cartService.getCartProducts().length;
   }
 }
 </script>

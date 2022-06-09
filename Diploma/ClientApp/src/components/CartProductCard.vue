@@ -1,11 +1,11 @@
 <template>
-    <div class="product_card" v-if="rem">
-      <img :src="image" alt="">
+    <div class="product_card">
+      <img :src="product.image" alt="">
       <div class="card_container">
-        <div class="product_name"><h3>{{ name }}</h3></div>
-        <input class="count" type="number" min="1" max="99" :value="count">
+        <div class="product_name"><h3>{{ product.name }}</h3></div>
+        <input class="count" type="number" min="1" max="99" :value="count" @input="onCountChange">
         <input class="remove_button" type="button" value="Удалить" @click="removeFromCart">
-        <div class="product_cost">{{ cost }} руб.</div>
+        <div class="product_cost">{{ sum }} руб.</div>
       </div>
     </div>
 </template>
@@ -16,20 +16,29 @@
   export default {
     name: 'CartProductCard',
     props: {
-      image: String,
-      name: String,
-      cost: Number,
+      product: {
+        image: String,
+        name: String,
+        cost: Number,
+        id: String
+      },
       count: Number,
-      id: String
+      sum: Number
     },
-    data () {
-      return {
-        rem: true
-      }
+
+    emits: [ 'countChange', 'remove' ],
+
+    data() {
+      return {}
     },
+
     methods: {
-      removeFromCart () {
-        cartService.remove(this.id, 1)
+      removeFromCart() {
+        this.$emit('remove')
+      },
+
+      onCountChange(e) {
+        this.$emit('countChange', e.target.valueAsNumber)
       }
     }
   }
