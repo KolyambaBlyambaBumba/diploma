@@ -1,5 +1,4 @@
 <template>
-  <div class="cart">
     <div class="product_card">
       <img :src="image" alt="">
       <div class="card_container">
@@ -9,7 +8,6 @@
         <div class="product_cost">{{ cost }} руб.</div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -26,13 +24,6 @@
 </script>
 
 <style lang="scss" scoped>
-.cart {
-  display: flex;
-  max-width: 1200px;
-  width: 100%;
-  flex-direction: column;
-}
-
 .product_card {
   max-width: 700px;
   display: flex;
@@ -42,6 +33,7 @@
   margin: 0 0 10px 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(51, 51, 51, 0.5);
+  justify-content: space-between;
 
 
   img {

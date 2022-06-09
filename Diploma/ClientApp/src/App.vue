@@ -195,6 +195,7 @@ export default {
     font-size: 12pt;
     font-weight: 600;
     padding-right: 1px;
+    padding-top: 1px;
   }
 
 .footer {

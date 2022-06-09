@@ -39,12 +39,9 @@ export default {
 </style>
 
 <style>
-.carousel_div {
-
-}
-
 .carousel_img {
   max-width: 1180px;
   max-height: 580px;
+  border-radius: 3px;
   }
 </style>

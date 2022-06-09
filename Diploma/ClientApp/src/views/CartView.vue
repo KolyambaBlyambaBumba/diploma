@@ -1,6 +1,9 @@
 <template>
-  <cart-product-card v-for="product in products" :key="product.id" v-bind="product"></cart-product-card>
-  <input class="cart_form" type="button" value="Заказать">
+  <div class="cart">
+    <cart-product-card v-for="product in products" :key="product.id" v-bind="product"></cart-product-card>
+    <div class="total_sum">Итого: 123,00 руб.</div>
+  </div>
+  <input class="cart_form_btn" type="button" value="Заказать">
 </template>
 
 <script>
@@ -25,7 +28,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cart_form {
+.cart {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  flex-direction: column;
+  position: relative;
+}
+
+.cart_form_btn {
+  max-width: 100px;
   padding: 10px 15px;
   cursor: pointer;
   border: 0;
@@ -37,11 +49,22 @@ export default {
   transition: .1s;
 }
 
-.cart_form:hover {
+.cart_form_btn:hover {
   background-color: #f0c800;
 }
 
-.cart_form:active {
+.cart_form_btn:active {
   background-color: #ff3205;
+}
+
+.total_sum {
+  position: fixed;
+  right: 70px;
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 13pt;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
 }
 </style>

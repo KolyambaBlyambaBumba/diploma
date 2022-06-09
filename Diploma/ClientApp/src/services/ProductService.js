@@ -6,14 +6,14 @@ const products = [
     image: s123,
     name: 'Букет',
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quo autem ut.',
-    cost: 25
+    cost: 250
   },
   {
     id: '2',
     image: s123,
     name: 'Букет 2',
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quo autem ut.',
-    cost: 30
+    cost: 3
   }
 ]
 
