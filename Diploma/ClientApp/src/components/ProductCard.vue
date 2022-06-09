@@ -4,16 +4,14 @@
         <div class="product_name"><h3>{{ name }}</h3></div>
         <div class="product_description">{{ description }}</div>
         <div class="product_cost">{{ cost }} руб.</div>
-        <input class="card_btn" type="button" value="В корзину" @click="addToCart">
-        <router-link to="/cart">
+        <input class="card_btn" type="button" value="В корзину" @click="addToCart" v-if="!isInCart">
+        <router-link to="/cart" v-else>
           <input class="card_btn_done" type="button" value="В корзине">
         </router-link>
     </div>
 </template>
 
 <script>
-import cartService from '@/services/CartService'
-
 export default {
   name: 'ProductCard',
   props: {
@@ -21,11 +19,13 @@ export default {
     name: String,
     description: String,
     cost: Number,
-    id: String
+    id: String,
+    isInCart: Boolean
   },
+  emits: [ 'addToCart' ],
   methods: {
     addToCart () {
-      cartService.add(this.id, 1)
+      this.$emit('addToCart')
     }
   }
 }

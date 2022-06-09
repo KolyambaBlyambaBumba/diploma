@@ -1,17 +1,20 @@
 <template>
   <div class="cart">
-    <cart-product-card v-for="product in products" :key="product.id" v-bind="product"></cart-product-card>
+    <cart-product-card v-for="cartProduct in cart.cartProducts" :key="cartProduct.product.id" v-bind="cartProduct"
+      @remove="() => removeFromCart(cartProduct.product.id)" @countChange="newCount => changeCount(cartProduct.product.id, newCount)"/>
     <div class="total_sum_container">
-      <div class="total_sum">Итого: 123,00 руб.</div>
+      <div class="total_sum">Итого: {{cart.sum}} руб.</div>
     </div>
   </div>
   <input class="cart_form_btn" type="button" value="Заказать">
+  <input class="cart_form_btn" type="button" value="Очистить" @click="clearCart">
 </template>
 
 <script>
 
 import CartProductCard from '@/components/CartProductCard'
-import productService from '@/services/ProductService'
+import cartService from "@/services/CartService";
+
 export default {
   name: 'CartView',
   components: {
@@ -19,12 +22,38 @@ export default {
   },
   data: function () {
     return {
-      products: []
+      cart: {
+        cartProducts: [],
+        count: 0,
+        sum: 0
+      }
     }
   },
 
   async created () {
-    this.products = await productService.getProducts()
+    await this.loadCart()
+  },
+
+  methods: {
+    async removeFromCart(productId) {
+      cartService.remove(productId)
+      await this.loadCart()
+    },
+
+    async changeCount(productId, newCount) {
+      const cartProduct = this.cart.cartProducts.filter(p => p.product.id === productId)[0]
+      cartService.add(productId, newCount - cartProduct.count)
+      await this.loadCart()
+    },
+
+    async loadCart() {
+      this.cart = await cartService.getCartFullInfo()
+    },
+
+    clearCart() {
+      cartService.clear()
+      this.loadCart()
+    }
   }
 }
 </script>
