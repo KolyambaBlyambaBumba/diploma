@@ -20,7 +20,7 @@
         <router-link to="/contacts" class="nav_rl">Контакты</router-link>
       </nav>
       <router-link to="/cart" class="nav_cart">Корзина
-        <span class="nav_cart_count">{{ productsInCart }}</span>
+        <span class="nav_cart_count" v-if="productsInCart">{{ productsInCart }}</span>
       </router-link>
     </div>
   </div>
@@ -51,7 +51,12 @@ export default {
   },
 
   created() {
-    this.productsInCart = cartService.getCartProducts().length;
+    const updateProductsInCart = () => this.productsInCart = cartService.getCartProducts().length
+    this.cartChangeUnsubscription = cartService.on("change", updateProductsInCart)
+  },
+
+  unmounted() {
+    this.cartChangeUnsubscription()
   }
 }
 </script>

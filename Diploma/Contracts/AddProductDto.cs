@@ -8,4 +8,6 @@ public class AddProductDto
 	public string Name { get; init; } = null!;
 
 	public string? Description { get; init; }
+
+	public decimal Cost { get; init; }
 }

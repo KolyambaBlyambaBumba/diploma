@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using Diploma.Contracts;
 using Diploma.Exceptions;
 using Diploma.Models;
@@ -14,6 +13,7 @@ public class ProductsController : ControllerBase
 	private readonly ILogger<ProductsController> logger;
 	private readonly CatalogContext catalogContext;
 	private readonly DbSet<Product> productSet;
+	private readonly IQueryable<Product> productQuery;
 	private readonly DbSet<ProductImage> productImageSet;
 
 	public ProductsController(ILogger<ProductsController> logger, CatalogContext catalogContext)
@@ -22,19 +22,25 @@ public class ProductsController : ControllerBase
 		this.catalogContext = catalogContext ?? throw new ArgumentNullException(nameof(catalogContext));
 		productSet = catalogContext.Set<Product>();
 		productImageSet = catalogContext.Set<ProductImage>();
+		productQuery = productSet.OrderBy(x => x.Name);
 	}
 
 	[HttpGet]
 	public async Task<IEnumerable<ProductDto>> GetProducts(CancellationToken cancellationToken) =>
-		(await productSet
+		(await productQuery
 			.Select(x => new Product
 			{
 				Id = x.Id,
 				Description = x.Description,
 				Name = x.Name,
 				Images = x.Images.Select(y => new ProductImage { Id = y.Id }).ToList(),
+				Cost = x.Cost,
 			})
 			.ToListAsync(cancellationToken)).Select(ToDto);
+
+	[HttpGet("{id}")]
+	public async Task<ProductDto> GetProductById(Guid id, CancellationToken cancellationToken) =>
+		(await productQuery.Where(x => x.Id == id).ToListAsync(cancellationToken)).Select(ToDto).First();
 
 	[HttpPost]
 	public async Task<ProductDto> AddProduct(
@@ -45,6 +51,7 @@ public class ProductsController : ControllerBase
 			Id = Guid.NewGuid(),
 			Name = addProductDto.Name,
 			Description = addProductDto.Description,
+			Cost = addProductDto.Cost,
 		};
 		productSet.Add(newProduct);
 
@@ -132,7 +139,8 @@ public class ProductsController : ControllerBase
 		Id = product.Id.ToString(),
 		Name = product.Name,
 		Description = product.Description,
-		ImageLink = product.Images.Any()
+		Cost = product.Cost,
+		Image = product.Images.Any()
 			? new Uri(Url.ActionLink(nameof(GetProductImage), values: new { productId = product.Id })!)
 			: null,
 	};

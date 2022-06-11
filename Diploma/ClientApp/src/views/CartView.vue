@@ -1,17 +1,19 @@
 <template>
   <div class="cart">
-    <cart-product-card v-for="cartProduct in cart.cartProducts"
-      :key="cartProduct.product.id"
-      v-bind="cartProduct"
-      @remove="() => removeFromCart(cartProduct.product.id)"
-      @countChange="newCount => changeCount(cartProduct.product.id, newCount)"
-    />
-    <div class="total_sum_container">
+    <div v-if="cart.cartProducts.length">
+      <cart-product-card v-for="cartProduct in cart.cartProducts"
+                         :key="cartProduct.product.id"
+                         v-bind="cartProduct"
+                         @remove="() => removeFromCart(cartProduct.product.id)"
+                         @countChange="newCount => changeCount(cartProduct.product.id, newCount)"
+      />
+    </div>
+    <div class="cart_empty" v-else>Ваша корзина пуста</div>
+    <div class="total_sum_container" v-if="cart.cartProducts.length">
       <div class="total_sum">Итого: {{cart.sum}} руб.</div>
     </div>
-    <div class="cart_empty">Ваша корзина пуста</div>
   </div>
-  <input class="cart_form_btn" type="button" value="Заказать">
+  <input v-if="cart.cartProducts.length" class="cart_form_btn" type="button" value="Заказать">
 </template>
 
 <script>

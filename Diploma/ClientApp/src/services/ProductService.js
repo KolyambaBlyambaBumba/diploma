@@ -1,36 +1,12 @@
-import s123 from '@/assets/s123.png'
-
-const products = [
-  {
-    id: '1',
-    image: s123,
-    name: 'Букет',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quo autem ut.',
-    cost: 250
-  },
-  {
-    id: '2',
-    image: s123,
-    name: 'Букет 2',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quo autem ut.',
-    cost: 3
-  },
-  {
-    id: '3',
-    image: s123,
-    name: 'Букет 3',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quo autem ut.',
-    cost: 76
-  },
-]
+const apiUrl = process.env.VUE_APP_API_ROOT
 
 class ProductService {
-  async getProducts () {
-    return products
+  async getProducts() {
+    return await (await fetch(`${apiUrl}/api/products`)).json()
   }
 
-  async getProductById (id) {
-    return products.filter(x => x.id === id)[0]
+  async getProductById(id) {
+    return await (await fetch(`${apiUrl}/api/products/${id}`)).json()
   }
 }
 

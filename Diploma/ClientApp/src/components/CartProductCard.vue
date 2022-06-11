@@ -3,7 +3,7 @@
       <img :src="product.image" alt="">
       <div class="card_container">
         <div class="product_name"><h3>{{ product.name }}</h3></div>
-        <input class="count" type="number" min="1" max="99" :value="count" @input="onCountChange">
+        <input class="count" type="number" min="1" max="99" :value="currentCount" @change="onCountChange">
         <input class="remove_button" type="button" value="Удалить" @click="removeFromCart">
         <div class="product_cost">{{ sum }} руб.</div>
       </div>
@@ -27,7 +27,9 @@
     emits: [ 'countChange', 'remove' ],
 
     data() {
-      return {}
+      return {
+        currentCount: this.count
+      }
     },
 
     methods: {
@@ -36,7 +38,16 @@
       },
 
       onCountChange(e) {
-        this.$emit('countChange', e.target.valueAsNumber)
+        let newCount = e.target.valueAsNumber;
+        if (newCount < 1) {
+          newCount = 1;
+        }
+        else if (newCount > 99) {
+          newCount = 99;
+        }
+
+        this.currentCount = newCount;
+        this.$emit('countChange', newCount)
       }
     }
   }
