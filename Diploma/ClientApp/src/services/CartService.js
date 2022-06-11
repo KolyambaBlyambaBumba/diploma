@@ -1,16 +1,20 @@
 import productService from "@/services/ProductService";
+import Observable from "@/utils/Observable";
 
 class CartService {
+  #changeObservable = new Observable('cartChange')
+
   add(productId, count) {
     const cart = this.getCartProducts();
 
     // Получаем продукт из корзины
     let product = cart.filter((item) => item.productId === productId)[0]
 
-    // Если продукт в корзине есть, то увеличиваем кол-во, иначе добавляем новый продукт с переданным кол-м
+    // Если продукт в корзине есть, то увеличиваем кол-во
     if (product) {
       product.count += count
     }
+    // Иначе добавляем новый продукт с переданным кол-м
     else {
       product = { productId, count }
       cart.push(product)
@@ -21,11 +25,14 @@ class CartService {
     }
 
     CartService.#saveCart(cart)
+
+    this.#changeObservable.fire()
   }
 
   remove(productId) {
     const cart = this.getCartProducts()
     CartService.#saveCart(cart.filter((item) => item.productId !== productId))
+    this.#changeObservable.fire()
   }
 
   getCartProducts() {
@@ -52,6 +59,15 @@ class CartService {
 
   clear() {
     CartService.#saveCart([])
+    this.#changeObservable.fire()
+  }
+
+  on(eventName, callback) {
+    if (eventName !== "change") {
+      throw new Error(`Некоректное имя события ${eventName}`)
+    }
+
+    return this.#changeObservable.subscribe(callback);
   }
 
   static #saveCart(cart) {
