@@ -19,16 +19,22 @@
         <router-link to="/delivery" class="nav_rl">Оплата и доставка</router-link>
         <router-link to="/contacts" class="nav_rl">Контакты</router-link>
       </nav>
-      <router-link to="/cart" class="nav_cart">Корзина<span class="nav_cart_count">{{ productsInCart }}</span></router-link>
+      <router-link to="/cart" class="nav_cart">Корзина
+        <span class="nav_cart_count">{{ productsInCart }}</span>
+      </router-link>
     </div>
   </div>
 
   <router-view />
   <div class="footer">
-    <div class="footer_info">text</div>
+    <p>2022 © Все права защищены</p>
     <div class="links">
-      <a href="https://vk.com/alwa_soap"><img src="@/assets/vk_link.svg" alt="" id="vk_img"></a>
-      <a href="https://instagram.com/alwa_soap?igshid=YmMyMTA2M2Y="><img src="@/assets/instagram_link.svg" alt="" id="insta_img"></a>
+      <a href="https://vk.com/alwa_soap">
+        <img src="@/assets/vk_link.svg" alt="" id="vk_img">
+      </a>
+      <a href="https://instagram.com/alwa_soap?igshid=YmMyMTA2M2Y=">
+        <img src="@/assets/instagram_link.svg" alt="" id="insta_img">
+      </a>
     </div>
   </div>
 </template>
@@ -212,18 +218,24 @@ export default {
   align-items: center;
   max-width: 1200px;
   width: 100%;
-  height: 60px;
+  height: 50px;
   background-color: #333;
   border-radius: 3px;
   color: #fff;
   margin-top: 10px;
-  //position: fixed;
-  //bottom: 0;
+  position: fixed;
+  bottom: 0;
+
+  p {
+    margin-left: 20px;
+    font-size: 8pt;
+  }
 }
 
 .links {
   display: flex;
   align-items: center;
+  margin-right: 20px;
 
   a {
     height: 25px;
@@ -231,7 +243,7 @@ export default {
 }
 
 #vk_img {
-  width: 25px;
+  width: 22px;
 
   &:hover {
     opacity: 0.8;
@@ -239,7 +251,8 @@ export default {
 }
 
 #insta_img {
-  width: 20px;
+  width: 22px;
+  margin-left: 10px;
 
   &:hover {
     opacity: 0.8;

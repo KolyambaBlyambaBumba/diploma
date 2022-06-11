@@ -11,8 +11,6 @@
 </template>
 
 <script>
-  import cartService from '@/services/CartService'
-
   export default {
     name: 'CartProductCard',
     props: {

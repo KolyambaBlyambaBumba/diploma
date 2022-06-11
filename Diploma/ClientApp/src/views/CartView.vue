@@ -1,13 +1,17 @@
 <template>
   <div class="cart">
-    <cart-product-card v-for="cartProduct in cart.cartProducts" :key="cartProduct.product.id" v-bind="cartProduct"
-      @remove="() => removeFromCart(cartProduct.product.id)" @countChange="newCount => changeCount(cartProduct.product.id, newCount)"/>
+    <cart-product-card v-for="cartProduct in cart.cartProducts"
+      :key="cartProduct.product.id"
+      v-bind="cartProduct"
+      @remove="() => removeFromCart(cartProduct.product.id)"
+      @countChange="newCount => changeCount(cartProduct.product.id, newCount)"
+    />
     <div class="total_sum_container">
       <div class="total_sum">Итого: {{cart.sum}} руб.</div>
     </div>
+    <div class="cart_empty">Ваша корзина пуста</div>
   </div>
   <input class="cart_form_btn" type="button" value="Заказать">
-  <input class="cart_form_btn" type="button" value="Очистить" @click="clearCart">
 </template>
 
 <script>
@@ -103,5 +107,13 @@ export default {
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 2px;
+}
+
+.cart_empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  height: 500px;
 }
 </style>

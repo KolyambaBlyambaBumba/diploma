@@ -1,27 +1,24 @@
 <template>
   <div class="home">
-    <vue-carousel :data="data" :controls="false" indicator-type="disc" :interval="1000" class="carousel_div"></vue-carousel>
+    <div class="images_catalog">
+      <div class="img_item"><img src="@/assets/home_images/i11.png" alt=""></div>
+      <div class="img_item"><img src="@/assets/home_images/i22.jpg" alt=""></div>
+      <div class="img_item"><img src="@/assets/home_images/i33.jpg" alt=""></div>
+      <div class="img_item"><img src="@/assets/home_images/i44.jpg" alt=""></div>
+      <div class="img_item"><img src="@/assets/home_images/i55.jpg" alt=""></div>
+      <div class="img_item"><img src="@/assets/home_images/i66.jpg" alt=""></div>
+    </div>
   </div>
 </template>
 
 <script>
-import VueCarousel from '@chenfengyuan/vue-carousel'
-import s123 from '@/assets/s123.png'
-
 export default {
   name: 'HomeView',
   components: {
-    VueCarousel
   },
   data () {
     return {
-      data: [
-        `<div><img src="${s123}" alt="" class="carousel_img"></div>`,
-        `<div><img src="${s123}" alt="" class="carousel_img"></div>`,
-        `<div><img src="${s123}" alt="" class="carousel_img"></div>`,
-        `<div><img src="${s123}" alt="" class="carousel_img"></div>`,
-        `<div><img src="${s123}" alt="" class="carousel_img"></div>`
-      ]
+
     }
   }
 }
@@ -36,12 +33,28 @@ export default {
     height: 100%;
     flex-direction: column;
   }
-</style>
 
-<style>
-.carousel_img {
-  max-width: 1180px;
-  max-height: 580px;
-  border-radius: 3px;
+  .images_catalog {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .img_item {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 290px;
+      margin: 0 15px 10px 0;
+    }
   }
 </style>
+
+<!--<style>-->
+<!--.carousel_img {-->
+<!--  max-width: 1180px;-->
+<!--  max-height: 580px;-->
+<!--  border-radius: 3px;-->
+<!--  }-->
+<!--</style>-->
