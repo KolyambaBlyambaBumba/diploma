@@ -8,5 +8,7 @@ public class ProductDto
 
 	public string? Description { get; init; }
 
-	public Uri? ImageLink { get; init; }
+	public Uri? Image { get; init; }
+
+	public decimal Cost { get; init; }
 }

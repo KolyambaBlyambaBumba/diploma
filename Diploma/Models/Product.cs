@@ -8,6 +8,8 @@ public class Product
 
 	public string? Description { get; init; }
 
+	public decimal Cost { get; init; }
+
 #pragma warning disable CA1002
 	public ICollection<ProductImage> Images { get; init; } = new List<ProductImage>();
 #pragma warning restore CA1002
