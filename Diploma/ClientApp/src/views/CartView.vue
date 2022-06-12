@@ -1,11 +1,12 @@
 <template>
+  <PopupForm v-model:popup-visible="popupVisible"/>
   <div class="cart">
     <div v-if="cart.cartProducts.length">
       <cart-product-card v-for="cartProduct in cart.cartProducts"
-                         :key="cartProduct.product.id"
-                         v-bind="cartProduct"
-                         @remove="() => removeFromCart(cartProduct.product.id)"
-                         @countChange="newCount => changeCount(cartProduct.product.id, newCount)"
+       :key="cartProduct.product.id"
+       v-bind="cartProduct"
+       @remove="() => removeFromCart(cartProduct.product.id)"
+       @countChange="newCount => changeCount(cartProduct.product.id, newCount)"
       />
     </div>
     <div class="cart_empty" v-else>Ваша корзина пуста</div>
@@ -13,17 +14,18 @@
       <div class="total_sum">Итого: {{cart.sum}} руб.</div>
     </div>
   </div>
-  <input v-if="cart.cartProducts.length" class="cart_form_btn" type="button" value="Заказать">
+  <input v-if="cart.cartProducts.length" class="cart_form_btn" type="button" value="Заказать" @click="popupOpen">
 </template>
 
 <script>
-
+import PopupForm from '@/components/PopupForm'
 import CartProductCard from '@/components/CartProductCard'
-import cartService from "@/services/CartService";
+import cartService from "@/services/CartService"
 
 export default {
   name: 'CartView',
   components: {
+    PopupForm,
     CartProductCard
   },
   data: function () {
@@ -32,7 +34,8 @@ export default {
         cartProducts: [],
         count: 0,
         sum: 0
-      }
+      },
+      popupVisible: false,
     }
   },
 
@@ -41,24 +44,28 @@ export default {
   },
 
   methods: {
-    async removeFromCart(productId) {
+    async removeFromCart (productId) {
       cartService.remove(productId)
       await this.loadCart()
     },
 
-    async changeCount(productId, newCount) {
+    async changeCount (productId, newCount) {
       const cartProduct = this.cart.cartProducts.filter(p => p.product.id === productId)[0]
       cartService.add(productId, newCount - cartProduct.count)
       await this.loadCart()
     },
 
-    async loadCart() {
+    async loadCart () {
       this.cart = await cartService.getCartFullInfo()
     },
 
-    clearCart() {
+    clearCart () {
       cartService.clear()
       this.loadCart()
+    },
+
+    popupOpen () {
+      this.popupVisible = true
     }
   }
 }

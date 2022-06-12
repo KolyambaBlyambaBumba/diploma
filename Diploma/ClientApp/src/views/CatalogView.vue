@@ -1,13 +1,18 @@
 <template>
   <div class="catalog">
-    <ProductCard v-for="product in products" :key="product.id" v-bind="product" @addToCart="() => addToCart(product.id)"/>
+    <ProductCard
+      v-for="product in products"
+      :key="product.id"
+      v-bind="product"
+      @addToCart="() => addToCart(product.id)"
+    />
   </div>
 </template>
 
 <script>
 import ProductCard from '@/components/ProductCard.vue'
 import productService from '@/services/ProductService'
-import cartService from "@/services/CartService";
+import cartService from '@/services/CartService'
 
 export default {
   name: 'CatalogView',

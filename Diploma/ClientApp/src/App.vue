@@ -33,7 +33,7 @@
         <img src="@/assets/vk_link.svg" alt="" id="vk_img">
       </a>
       <a href="https://instagram.com/alwa_soap?igshid=YmMyMTA2M2Y=">
-        <img src="@/assets/instagram_link.svg" alt="" id="insta_img">
+        <img src="@/assets/instagram_link.svg" alt="" id="instagram_img">
       </a>
     </div>
   </div>
@@ -53,6 +53,7 @@ export default {
   created() {
     const updateProductsInCart = () => this.productsInCart = cartService.getCartProducts().length
     this.cartChangeUnsubscription = cartService.on("change", updateProductsInCart)
+    updateProductsInCart()
   },
 
   unmounted() {
@@ -204,9 +205,9 @@ export default {
     position: absolute;
     width: 25px;
     height: 25px;
-    border: 3px solid #ff3205;
+    border: 3px solid #64aa00;
     border-radius: 50%;
-    background-color: #ff3205;
+    background-color: #64aa00;
     text-align: center;
     right: -30px;
     bottom: 0;
@@ -248,15 +249,15 @@ export default {
 }
 
 #vk_img {
-  width: 22px;
+  width: 25px;
 
   &:hover {
     opacity: 0.8;
   }
 }
 
-#insta_img {
-  width: 22px;
+#instagram_img {
+  width: 25px;
   margin-left: 10px;
 
   &:hover {
