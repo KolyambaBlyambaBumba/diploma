@@ -4,10 +4,12 @@
         <div class="product_name"><h3>{{ name }}</h3></div>
         <div class="product_description">{{ description }}</div>
         <div class="product_cost">{{ cost }} руб.</div>
-        <input class="card_btn" type="button" value="В корзину" @click="addToCart" v-if="!isInCart">
-        <router-link to="/cart" v-else>
+        <transition name="mode-fade" mode="out-in">
+          <input class="card_btn" type="button" value="В корзину" @click="addToCart" v-if="!isInCart">
+          <router-link to="/cart" v-else>
           <input class="card_btn_done" type="button" value="В корзине">
-        </router-link>
+          </router-link>
+        </transition>
     </div>
 </template>
 
@@ -86,5 +88,13 @@ export default {
 
   .card_btn_done:hover {
     background-color: #64b428;
+  }
+
+  .mode-fade-enter-active, .mode-fade-leave-active {
+    transition: opacity .3s ease;
+  }
+
+  .mode-fade-enter-from, .mode-fade-leave-to {
+    opacity: 0
   }
 </style>

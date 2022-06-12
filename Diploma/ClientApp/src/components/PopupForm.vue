@@ -1,21 +1,23 @@
 <template>
-  <div class="popup_overlay" @click="popupClose" v-if="popupVisible">
-  <div class="popup" @click.stop>
-    <div class="popup_close" @click="popupClose">x</div>
-    <div class="popup_title">Оставить заявку</div>
-    <form action="">
-      <div class="popup_form">
-        <label for="name">Введите имя *</label>
-        <input type="text" id="name" required placeholder="Имя">
-        <label for="email">Введите E-mail *</label>
-        <input type="text" id="email" required placeholder="email@mail.by">
-        <label for="tel">Введите номер телефона</label>
-        <input type="tel" id="tel" placeholder="+375291234567">
-        <input type="submit" id="cart_submit" value="Отправить" @click="popupClose">
-      </div>
-    </form>
-  </div>
-  </div>
+  <transition name="bounce">
+    <div class="popup_overlay" @click="popupClose" v-if="popupVisible">
+    <div class="popup" @click.stop>
+      <div class="popup_close" @click="popupClose">x</div>
+      <div class="popup_title">Оставить заявку</div>
+      <form action="">
+        <div class="popup_form">
+          <label for="name">Введите имя *</label>
+          <input type="text" id="name" required placeholder="Имя">
+          <label for="email">Введите E-mail *</label>
+          <input type="text" id="email" required placeholder="email@mail.by">
+          <label for="tel">Введите номер телефона</label>
+          <input type="tel" id="tel" placeholder="+375291234567">
+          <input type="submit" id="cart_submit" value="Отправить" @click="popupClose">
+        </div>
+      </form>
+    </div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -115,5 +117,23 @@
 
   #cart_submit:hover {
     background-color: #f0c800;
+  }
+
+  .bounce-enter-active {
+    animation: bounce-in .3s ease-out both;
+  }
+
+  .bounce-leave-active {
+    animation: bounce-in .3s reverse ease-in both;
+  }
+
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+
+    100% {
+      transform: scale(1);
+    }
   }
 </style>

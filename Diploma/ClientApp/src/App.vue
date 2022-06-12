@@ -129,6 +129,11 @@ export default {
 
 .logo img {
   width: 160px;
+  transition: 1s;
+
+  &:hover {
+    transform: scale(1.4);
+  }
 }
 
 .header_bottom {
@@ -252,7 +257,7 @@ export default {
   width: 25px;
 
   &:hover {
-    opacity: 0.8;
+    transform: scale(1.1);
   }
 }
 
@@ -261,7 +266,7 @@ export default {
   margin-left: 10px;
 
   &:hover {
-    opacity: 0.8;
+    transform: scale(1.1);
   }
 }
 </style>

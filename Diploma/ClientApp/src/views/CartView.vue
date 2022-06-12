@@ -2,12 +2,14 @@
   <PopupForm v-model:popup-visible="popupVisible"/>
   <div class="cart">
     <div v-if="cart.cartProducts.length">
-      <cart-product-card v-for="cartProduct in cart.cartProducts"
-       :key="cartProduct.product.id"
-       v-bind="cartProduct"
-       @remove="() => removeFromCart(cartProduct.product.id)"
-       @countChange="newCount => changeCount(cartProduct.product.id, newCount)"
-      />
+      <transition-group name="product_list">
+        <cart-product-card v-for="cartProduct in cart.cartProducts"
+         :key="cartProduct.product.id"
+         v-bind="cartProduct"
+         @remove="() => removeFromCart(cartProduct.product.id)"
+         @countChange="newCount => changeCount(cartProduct.product.id, newCount)"
+        />
+      </transition-group>
     </div>
     <div class="cart_empty" v-else>Ваша корзина пуста</div>
     <div class="total_sum_container" v-if="cart.cartProducts.length">
@@ -97,10 +99,6 @@ export default {
   background-color: #f0c800;
 }
 
-.cart_form_btn:active {
-  background-color: #ff3205;
-}
-
 .total_sum_container {
   position: absolute;
   right: 10px;
@@ -124,5 +122,19 @@ export default {
   align-items: center;
   color: #333;
   height: 500px;
+}
+
+.product_list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.product_list-enter-active,
+.product_list-leave-active {
+  transition: all .3s ease;
+}
+.product_list-enter-from,
+.product_list-leave-to {
+  opacity: 0;
+  transform: translateX(50px);
 }
 </style>
