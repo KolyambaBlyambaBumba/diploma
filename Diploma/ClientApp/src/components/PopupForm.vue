@@ -1,11 +1,11 @@
 <template>
   <transition name="bounce">
-    <div class="popup_overlay" @click="submitForm" v-if="popupVisible">
+    <div class="popup_overlay" @click="closePopup" v-if="popupVisible">
     <div class="popup" @click.stop>
-      <div class="popup_close" @click="submitForm">x</div>
+      <div class="popup_close" @click="closePopup">x</div>
       <div class="popup_title">Оставить заявку</div>
       <form action="" @submit="submitForm" @submit.prevent>
-        <div class="popup_form" @submit="submitForm">
+        <div class="popup_form">
           <label for="name">Введите имя *</label>
           <input type="text" id="name" required placeholder="Имя" v-model="name">
           <label for="email">Введите E-mail *</label>
@@ -44,6 +44,10 @@
     methods: {
       async submitForm(e) {
         await orderService.createOrderFromCart(this.name, this.email, this.phone)
+        this.closePopup()
+      },
+
+      closePopup() {
         this.$emit('update:popupVisible', false)
       }
     }
