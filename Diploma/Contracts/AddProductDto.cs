@@ -9,5 +9,6 @@ public class AddProductDto
 
 	public string? Description { get; init; }
 
+	[Required]
 	public decimal Cost { get; init; }
 }

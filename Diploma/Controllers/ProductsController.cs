@@ -1,5 +1,5 @@
 using Diploma.Contracts;
-using Diploma.Exceptions;
+using Diploma.Extensions;
 using Diploma.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -63,7 +63,7 @@ public class ProductsController : ControllerBase
 	[HttpDelete("{productId}")]
 	public async Task DeleteProduct(Guid productId, CancellationToken cancellationToken)
 	{
-		var product = await GetProductInternal(productId, false, cancellationToken);
+		var product = await productSet.GetById(productId, false, cancellationToken);
 		productSet.Remove(product);
 		await catalogContext.SaveChangesAsync(cancellationToken);
 	}
@@ -71,7 +71,7 @@ public class ProductsController : ControllerBase
 	[HttpGet("{productId}/image")]
 	public async Task<IActionResult> GetProductImage(Guid productId, CancellationToken cancellationToken)
 	{
-		var product = await GetProductInternal(productId, true, cancellationToken);
+		var product = await productSet.GetById(productId, true, cancellationToken);
 
 		if (!product.Images.Any())
 		{
@@ -87,7 +87,7 @@ public class ProductsController : ControllerBase
 	public async Task<IActionResult> UpdateProductImage(Guid productId, IFormFile productImage,
 		CancellationToken cancellationToken)
 	{
-		await GetProductInternal(productId, false, cancellationToken);
+		await productSet.GetById(productId, false, cancellationToken);
 
 		productImageSet.RemoveRange(await productImageSet.Where(x => x.ProductId == productId)
 			.ToListAsync(cancellationToken));
@@ -107,7 +107,7 @@ public class ProductsController : ControllerBase
 	[HttpDelete("{productId}/image")]
 	public async Task<IActionResult> DeleteProductImage(Guid productId, CancellationToken cancellationToken)
 	{
-		await GetProductInternal(productId, false, cancellationToken);
+		await productSet.GetById(productId, false, cancellationToken);
 
 		productImageSet.RemoveRange(await productImageSet.Where(x => x.ProductId == productId)
 			.ToListAsync(cancellationToken));
@@ -115,23 +115,6 @@ public class ProductsController : ControllerBase
 		await catalogContext.SaveChangesAsync(cancellationToken);
 
 		return Ok();
-	}
-
-	private async Task<Product> GetProductInternal(Guid productId, bool loadImages, CancellationToken cancellationToken)
-	{
-		var query = productSet.Where(x => x.Id == productId);
-		if (loadImages)
-		{
-			query = query.Include(x => x.Images);
-		}
-
-		var product = await query.FirstOrDefaultAsync(cancellationToken);
-		if (product == null)
-		{
-			throw new ItemNotFoundException($"Product with id {productId} was not found");
-		}
-
-		return product;
 	}
 
 	private ProductDto ToDto(Product product) => new()

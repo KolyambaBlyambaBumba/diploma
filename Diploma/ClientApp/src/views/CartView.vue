@@ -42,28 +42,26 @@ export default {
   },
 
   async created () {
+    this.cartChangeUnsubscription = cartService.on('change', async () => await this.loadCart())
     await this.loadCart()
+  },
+
+  unmounted() {
+    this.cartChangeUnsubscription()
   },
 
   methods: {
     async removeFromCart (productId) {
       cartService.remove(productId)
-      await this.loadCart()
     },
 
     async changeCount (productId, newCount) {
       const cartProduct = this.cart.cartProducts.filter(p => p.product.id === productId)[0]
       cartService.add(productId, newCount - cartProduct.count)
-      await this.loadCart()
     },
 
     async loadCart () {
       this.cart = await cartService.getCartFullInfo()
-    },
-
-    clearCart () {
-      cartService.clear()
-      this.loadCart()
     },
 
     popupOpen () {
