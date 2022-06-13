@@ -42,6 +42,7 @@ export default {
   },
 
   async created () {
+    // Добавляем подписку для перезагрузки представления корзины при ее изменении
     this.cartChangeUnsubscription = cartService.on('change', async () => await this.loadCart())
     await this.loadCart()
   },
@@ -51,20 +52,20 @@ export default {
   },
 
   methods: {
-    async removeFromCart (productId) {
+    async removeFromCart(productId) {
       cartService.remove(productId)
     },
 
-    async changeCount (productId, newCount) {
+    async changeCount(productId, newCount) {
       const cartProduct = this.cart.cartProducts.filter(p => p.product.id === productId)[0]
       cartService.add(productId, newCount - cartProduct.count)
     },
 
-    async loadCart () {
+    async loadCart() {
       this.cart = await cartService.getCartFullInfo()
     },
 
-    popupOpen () {
+    popupOpen() {
       this.popupVisible = true
     }
   }

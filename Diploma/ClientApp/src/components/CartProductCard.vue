@@ -39,6 +39,7 @@
 
       onCountChange(e) {
         let newCount = e.target.valueAsNumber;
+        // Валидация, чтобы не установить меньше 1 и больше 99
         if (newCount < 1) {
           newCount = 1;
         }
