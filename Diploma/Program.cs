@@ -1,5 +1,6 @@
 using Diploma;
 using Diploma.Extensions;
+using Diploma.Models;
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
@@ -17,6 +18,8 @@ builder.Services.AddAsyncInitializer(async sp =>
 	var dbContext = sp.GetRequiredService<CatalogContext>();
 	await dbContext.Database.EnsureCreatedAsync();
 });
+
+builder.Services.AddScoped(sp => sp.GetRequiredService<CatalogContext>().Set<Product>());
 
 var app = builder.Build();
 

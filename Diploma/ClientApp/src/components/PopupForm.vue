@@ -1,18 +1,18 @@
 <template>
   <transition name="bounce">
-    <div class="popup_overlay" @click="popupClose" v-if="popupVisible">
+    <div class="popup_overlay" @click="submitForm" v-if="popupVisible">
     <div class="popup" @click.stop>
-      <div class="popup_close" @click="popupClose">x</div>
+      <div class="popup_close" @click="submitForm">x</div>
       <div class="popup_title">Оставить заявку</div>
-      <form action="">
-        <div class="popup_form">
+      <form action="" @submit="submitForm" @submit.prevent>
+        <div class="popup_form" @submit="submitForm">
           <label for="name">Введите имя *</label>
-          <input type="text" id="name" required placeholder="Имя">
+          <input type="text" id="name" required placeholder="Имя" v-model="name">
           <label for="email">Введите E-mail *</label>
-          <input type="text" id="email" required placeholder="email@mail.by">
+          <input type="text" id="email" required placeholder="email@mail.by" v-model="email">
           <label for="tel">Введите номер телефона</label>
-          <input type="tel" id="tel" placeholder="+375291234567">
-          <input type="submit" id="cart_submit" value="Отправить" @click="popupClose">
+          <input type="tel" id="tel" placeholder="+375291234567" v-model="phone">
+          <input type="submit" id="cart_submit" value="Отправить">
         </div>
       </form>
     </div>
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+  import orderService from "@/services/OrderService";
+
   export default {
     name: 'PopupForm',
 
@@ -31,8 +33,17 @@
       }
     },
 
+    data() {
+      return {
+        name: '',
+        email: '',
+        phone: ''
+      }
+    },
+
     methods: {
-      popupClose () {
+      async submitForm(e) {
+        await orderService.createOrderFromCart(this.name, this.email, this.phone)
         this.$emit('update:popupVisible', false)
       }
     }
