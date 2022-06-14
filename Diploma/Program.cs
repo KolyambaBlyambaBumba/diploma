@@ -5,7 +5,7 @@ using Diploma.Models;
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
 	Args = args,
-	WebRootPath = Path.Combine("ClientApp", "build"),
+	WebRootPath = Path.Combine("ClientApp", "dist"),
 });
 
 builder.Services.AddControllers();
