@@ -9,4 +9,12 @@ describe('ProductCard.vue', () => {
     })
     expect(wrapper.text()).toMatch(name)
   })
+
+  it('renders props.description when passed', () => {
+    const description = 'Descr'
+    const wrapper = shallowMount(ProductCard, {
+      props: { description }
+    })
+    expect(wrapper.text()).toMatch(name)
+  })
 })
