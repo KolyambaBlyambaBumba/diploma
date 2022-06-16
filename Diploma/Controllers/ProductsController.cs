@@ -40,7 +40,7 @@ public class ProductsController : ControllerBase
 
 	[HttpGet("{id}")]
 	public async Task<ProductDto> GetProductById(Guid id, CancellationToken cancellationToken) =>
-		(await productQuery.Where(x => x.Id == id).ToListAsync(cancellationToken)).Select(ToDto).First();
+		ToDto(await productSet.GetById(id, true, cancellationToken));
 
 	[HttpPost]
 	public async Task<ProductDto> AddProduct(
