@@ -1,15 +1,17 @@
 <template>
     <div class="product_card">
+      <div class="img_container">
         <img :src="image" alt="">
-        <div class="product_name"><h3>{{ name }}</h3></div>
-        <div class="product_description">{{ description }}</div>
-        <div class="product_cost">{{ cost }} руб.</div>
-        <transition name="mode-fade" mode="out-in">
-          <input class="card_btn" type="button" value="В корзину" @click="addToCart" v-if="!isInCart">
-          <router-link to="/cart" v-else>
-          <input class="card_btn_done" type="button" value="В корзине">
-          </router-link>
-        </transition>
+      </div>
+      <div class="product_name"><h3>{{ name }}</h3></div>
+      <div class="product_description">{{ description }}</div>
+      <div class="product_cost">{{ cost }} руб.</div>
+      <transition name="mode-fade" mode="out-in">
+        <input class="card_btn" type="button" value="В корзину" @click="addToCart" v-if="!isInCart">
+        <router-link to="/cart" v-else>
+        <input class="card_btn_done" type="button" value="В корзине">
+        </router-link>
+      </transition>
     </div>
 </template>
 
@@ -41,16 +43,24 @@ export default {
     align-items: center;
     font-size: 10pt;
     margin: 0 10px 25px;
+  }
+
+  .img_container {
+    width: 300px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
 
     img {
       max-width: 300px;
+      max-height: 200px;
       border-radius: 3px;
     }
   }
 
   .product_name {
     h3 {
-      font-size: 16pt;
+      font-size: 14pt;
       margin: 5px 0;
     }
   }

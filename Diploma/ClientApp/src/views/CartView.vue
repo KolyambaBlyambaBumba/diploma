@@ -92,6 +92,7 @@ export default {
   font-size: 11pt;
   font-weight: 600;
   transition: .1s;
+  margin-bottom: 60px;
 }
 
 .cart_form_btn:hover {

@@ -33,7 +33,7 @@ public class OrdersController : ControllerBase
 			},
 			From =
 			{
-				new MailboxAddress("Мыло сайт", "alwasoapsite@yandex.by"),
+				new MailboxAddress("alwa_soap", "alwasoapsite@yandex.by"),
 			},
 			To =
 			{

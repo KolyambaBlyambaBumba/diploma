@@ -1,6 +1,8 @@
 <template>
     <div class="product_card">
-      <img :src="product.image" alt="">
+      <div class="img_container">
+        <img :src="product.image" alt="">
+      </div>
       <div class="card_container">
         <div class="product_name"><h3>{{ product.name }}</h3></div>
         <input class="count" type="number" min="1" max="99" :value="currentCount" @change="onCountChange">
@@ -64,10 +66,17 @@
   margin: 0 0 10px 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(51, 51, 51, 0.5);
+}
 
+.img_container {
+  width: 200px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
 
   img {
     max-width: 200px;
+    max-height: 100px;
     margin-right: 10px;
     border-radius: 3px;
   }
@@ -75,6 +84,7 @@
 
 .card_container {
   display: flex;
+  align-items: center;
 }
 
 .product_name {
@@ -98,7 +108,7 @@
 }
 
 .remove_button {
-  padding: 0 10px;
+  padding: 5px 10px;
   cursor: pointer;
   border: 0;
   border-radius: 3px;
